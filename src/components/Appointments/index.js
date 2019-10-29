@@ -6,12 +6,11 @@ import Empty from 'components/Appointments/Empty';
 import 'components/Appointments/styles.scss';
 
 export default function Appointment(props) {
-  let {id, time, interview} = props;
   return (
     <article className="appointment">
-      <Header time={time} />
-      {interview ? 
-        <Show student={interview.student} interviewer={interview.interviewer.name} /> 
+      <Header time={props.time} />
+      {props.interview ? 
+        <Show student={props.interview.student} interviewer={props.interview.interviewer.name} /> 
       : <Empty onAdd={() => console.log("Add New")} />}
     </article>
     );
