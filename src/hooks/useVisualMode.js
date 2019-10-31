@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function useVisualMode (input) {
+export function useVisualMode (input) {
   const [mode, setMode] = useState(input);
   const [history, setHistory] = useState([input]);
 
@@ -11,7 +11,7 @@ export default function useVisualMode (input) {
     }
     setMode(newMode);
   };
-  
+
   const back = () => {
     if (history.length > 1) {
       const popHistory = [...history];
