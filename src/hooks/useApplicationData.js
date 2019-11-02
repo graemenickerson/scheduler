@@ -18,13 +18,13 @@ const updateSpotsInDays = (state, action) => {
 
 // Looup for Reducer
 const appointmentLookup = {
-  getFromServer: (state, action) => {
+  SET_APPLICATION_DATA: (state, action) => {
     return {...state, days: action.value[0].data, appointments: action.value[1].data, interviewers: action.value[2].data };
   },
-  updateAppointments: (state, action) => {
+  SET_INTERVIEW: (state, action) => {
     return {...state, appointments: action.value, days: updateSpotsInDays(state, action)};
   },
-  setDay: (state, action) => {
+  SET_DAY: (state, action) => {
     return {...state, day: action.value};
   }
 }
@@ -41,24 +41,15 @@ const initialValue = {
   interviewers: {}
 };
 
+let webSocket;
+
 // Handles all matters pertaining to state for this application.
 export function useApplicationData() {
   const [state, dispatchState] = useReducer(appointmentReducer, initialValue);
 
-  const setDay = day => dispatchState({type: 'setDay', value: day});
+  const setDay = day => dispatchState({type: 'SET_DAY', value: day});
 
-  useEffect(() => {
-    Promise.all([
-      Promise.resolve(axios.get('/api/days')),
-      Promise.resolve(axios.get('/api/appointments')),
-      Promise.resolve(axios.get('/api/interviewers'))
-    ])
-      .then((all) => {
-        dispatchState({type: 'getFromServer', value: all});
-      });
-  }, []);
-
-  const changeAppointments = (id, interview) =>{
+  const changeAppointments = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -70,16 +61,42 @@ export function useApplicationData() {
     return { appointments, appointment };
   };
 
+  useEffect(() => {
+    // webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    // webSocket.onopen = (event) => {
+    //   webSocket.send('ping'); 
+    // };
+    // webSocket.onmessage = (event) => {
+    //   console.log("Message Received: ", event.data);
+    //   const update = JSON.parse(event.data);
+    //   if (update.type === 'SET_INTERVIEW') {
+    //     const { appointments } = changeAppointments(update.id, update.interview);
+    //     dispatchState({type: update.type, value: appointments, spots:{ id: (update.id), interview: (update.interview ? update.interview : null) }});
+    //   }
+    // }
+
+    Promise.all([
+      Promise.resolve(axios.get('/api/days')),
+      Promise.resolve(axios.get('/api/appointments')),
+      Promise.resolve(axios.get('/api/interviewers'))
+    ])
+      .then((all) => {
+        dispatchState({type: 'SET_APPLICATION_DATA', value: all});
+      });
+  }, []);
+
+  
+
   const bookInterview = (id, interview) => {
     const {appointments, appointment} = changeAppointments(id, interview);
     return axios.put(`/api/appointments/${id}`, appointment)
-      .then(() => dispatchState({type: 'updateAppointments', value: appointments, spots:{id, interview}}));
+      .then(() => dispatchState({type: 'SET_INTERVIEW', value: appointments, spots:{id, interview}}));
   }
 
   const cancelInterview = (id) => {
     const {appointments} = changeAppointments(id, null);
     return axios.delete(`/api/appointments/${id}`)
-      .then(() => dispatchState({type: 'updateAppointments', value: appointments, spots:{id, interview:null}}));
+      .then(() => dispatchState({type: 'SET_INTERVIEW', value: appointments, spots:{id, interview:null}}));
   }
 
   return {
