@@ -19,6 +19,6 @@ export function useVisualMode (input) {
       setMode(popHistory[popHistory.length - 1]);
     }
   };
-
+ 
   return { mode, transition, back};
-};
+}
