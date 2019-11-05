@@ -42,14 +42,14 @@ export default function Appointment(props) {
       .catch(() => transition(ERROR_DELETE, true));
   };
 
-  useEffect(() => {
-    if (props.interview && mode === EMPTY) {
-     transition(SHOW);
-    }
-    if (props.interview === null && mode === SHOW) {
-     transition(EMPTY);
-    }
-   }, [props.interview, transition, mode]);
+  // useEffect(() => {
+  //   if (props.interview && mode === EMPTY) {
+  //    transition(SHOW);
+  //   }
+  //   if (props.interview === null && mode === SHOW) {
+  //    transition(EMPTY);
+  //   }
+  //  }, [props.interview, transition, mode]);
 
   return (
     <article className="appointment" data-testid="appointment">

@@ -8,17 +8,20 @@ import axios from 'axios';
 // Updates the spots remaining for each day when it is updated.
 const updateSpotsInDays = (state, action) => {
   const {id, interview} = action.value
-  const updatedDays = state.days 
+  const updatedDays = [...state.days]
+  const result =[];
   for (let day of updatedDays) {
+    const newDay = {...day};
     if (day.appointments.includes(id)) {
       if (interview && state.appointments[id].interview === null ){
-        day.spots--;
+        newDay.spots--;
       } else if (interview === null) {
-        day.spots++;
+        newDay.spots++;
       }
     }
+    result.push(newDay);
   }
-  return updatedDays;
+  return result;
 };
 
 // Lookup for Reducer
