@@ -11,8 +11,10 @@ const updateSpotsInDays = (state, action) => {
   const updatedDays = state.days 
   for (let day of updatedDays) {
     if (day.appointments.includes(id)) {
-      if (interview && /*state.appointments[id].*/interview === null ){
-        interview ? day.spots -= 1 : day.spots += 1;
+      if (interview && state.appointments[id].interview === null ){
+        day.spots--;
+      } else if (interview === null) {
+        day.spots++;
       }
     }
   }
@@ -53,7 +55,7 @@ const initialValue = {
   interviewers: {}
 };
 
-let webSocket;
+// let webSocket;
 
 // Handles all matters pertaining to state for this application.
 export function useApplicationData() {
