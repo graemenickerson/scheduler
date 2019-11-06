@@ -1,4 +1,6 @@
+// axios.js
 
+// Mock data and server responses for jest tests.
 
 const fixtures = {
   days: [

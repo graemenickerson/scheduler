@@ -1,3 +1,7 @@
+// DayListItem.js
+// Graeme Nickerson
+// November 2019
+
 import React from "react";
 
 import "components/DayListItem.scss";
@@ -15,6 +19,7 @@ const formatSpots = (spots) => {
   }
 }; 
 
+// Builds each item to be displayed as part of the Day List.
 export default function DayListItem(props) {
   let dayListClass = classnames('day-list__item', {
     "day-list__item--selected": props.selected,

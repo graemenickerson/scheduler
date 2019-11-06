@@ -1,3 +1,7 @@
+// Error.js
+// Graeme Nickerson
+// November 2019
+
 import React from 'react';
 
 export default function Error(props) {

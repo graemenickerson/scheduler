@@ -43,6 +43,7 @@ const appointmentLookup = {
   }
 }
 
+// Reducer for state change requests.
 export const appointmentReducer = (state, action) => {
   if (appointmentLookup.hasOwnProperty(action.type)) {
     return appointmentLookup[action.type](state, action);

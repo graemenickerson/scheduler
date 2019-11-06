@@ -1,4 +1,9 @@
+// index.js
+// Graeme Nickerson
+// November 2019
+
 import React, { useEffect } from 'react';
+
 import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
@@ -21,6 +26,7 @@ const EDIT = "EDIT";
 const ERROR_DELETE = 'ERROR_DELETE';
 const ERROR_SAVE = 'ERROR_SAVE';
 
+// Main view of the aplication. Controls the views shown to the user.
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
   

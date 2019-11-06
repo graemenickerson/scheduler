@@ -1,6 +1,10 @@
+// Show.js
+// Graeme Nickerson
+// November 2019
+
 import React from 'react';
 
-
+// View that displays a booked appointment.
 export default function Show(props) {
   return (
     <main className="appointment__card appointment__card--show">

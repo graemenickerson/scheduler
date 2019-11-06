@@ -1,5 +1,9 @@
+// selectors.js
+// Graeme Nickerson
+// November 2019
 
 
+// Returns a list of the appointments that are present on a given day.
 export function getAppointmentsForDay(state, day) {
   const daySelected = state.days.filter(d => d.name === day);
   let result = []
@@ -11,6 +15,7 @@ export function getAppointmentsForDay(state, day) {
   return result;
 }
 
+// Returns the details of an appointment for a specified interview slot.
 export function getInterview(state, interview) {
   let result = null;
   if (interview) {
@@ -22,6 +27,7 @@ export function getInterview(state, interview) {
   return result;
 }
 
+// Returns the list of interviewers who are available for a given day.
 export function getInterviewersForDay(state, day) {
   let result = []
   const daySelected = state.days.filter(d => d.name === day);

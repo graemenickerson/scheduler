@@ -1,3 +1,7 @@
+// Appplication.js
+// Graeme Nickerson
+// November 2019
+
 import React from "react";
 
 import "./Application.scss";
@@ -6,6 +10,8 @@ import Appointments from './Appointments/index';
 import {getAppointmentsForDay, getInterview, getInterviewersForDay} from 'helpers/selectors';
 import { useApplicationData} from 'hooks/useApplicationData';
 
+
+// Controls the sidebar day list and the apointments shown.
 export default function Application(props) {
   const {
     state,

@@ -1,5 +1,11 @@
+// Status.js
+// Graeme Nickerson
+// November 2019
+
 import React from 'react';
 
+
+// The spinner and message shown when sending something to the server.
 export default function Status(props) {
   return (
     <main className="appointment__card appointment__card--status">

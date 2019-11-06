@@ -1,5 +1,10 @@
+// useVisualMode.js
+// Graeme Nickerson
+// November 2019
+
 import { useState } from 'react';
 
+// Returns mode and functions that track which view is visible on each appointment slot.
 export function useVisualMode (input) {
   const [mode, setMode] = useState(input);
   const [history, setHistory] = useState([input]);

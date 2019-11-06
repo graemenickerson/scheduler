@@ -1,6 +1,11 @@
+// Confirm.js
+// Graeme Nickerson
+// November 2019
+
 import React from 'react';
 import Button from 'components/Button'
 
+// Confimation Prompt shown to users when they are deleting an appointment.
 export default function Confirm(props) {
   return (
     <main className="appointment__card appointment__card--confirm">

@@ -1,9 +1,14 @@
+// InterviewerList.js
+// Graeme Nickerson
+// November 2019
+
 import React from "react";
 import PropTypes from 'prop-types';
 
 import InterviewerListItem from 'components/InterviewerListItem';
 import "components/InterviewerList.scss";
 
+// This creates the group of pictures that are shown when booking an appointment.
 export default function InterviewerList(props) {
   const interviewerList = props.interviewers.map(interviewer => {
     return (
