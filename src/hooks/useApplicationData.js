@@ -15,7 +15,7 @@ const initialValue = {
   interviewers: {}
 };
 
-// let webSocket;
+let webSocket;
 
 // Handles all matters pertaining to state for this application.
 export function useApplicationData() {
@@ -24,16 +24,16 @@ export function useApplicationData() {
   const setDay = day => dispatchState({type: 'SET_DAY', value: day});
 
   useEffect(() => {
-    // webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-    // webSocket.onopen = (event) => {
-    //   webSocket.send('ping'); 
-    // };
-    // webSocket.onmessage = (event) => {
-    //   const update = JSON.parse(event.data);
-    //   if (update.type === 'SET_INTERVIEW') {
-    //     dispatchState({type: update.type, value:{ id: (update.id), interview: update.interview }});
-    //   }
-    // }
+    webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    webSocket.onopen = (event) => {
+      webSocket.send('ping'); 
+    };
+    webSocket.onmessage = (event) => {
+      const update = JSON.parse(event.data);
+      if (update.type === 'SET_INTERVIEW') {
+        dispatchState({type: update.type, value:{ id: (update.id), interview: update.interview }});
+      }
+    }
 
     Promise.all([
       Promise.resolve(axios.get('/api/days')),

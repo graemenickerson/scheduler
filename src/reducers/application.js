@@ -12,7 +12,7 @@ const updateSpotsInDays = (state, action) => {
     if (day.appointments.includes(id)) {
       if (interview && state.appointments[id].interview === null ){
         newDay.spots--;
-      } else if (interview === null) {
+      } else if (interview === null && state.appointments[id].interview !== null) {
         newDay.spots++;
       }
     }
